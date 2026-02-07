@@ -1,15 +1,12 @@
 # python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
 .venv/
 venv/
 .env
 
-# artifacts
-data/raw/
-data/processed/
+# data and artifacts
+data/
 models/
 reports/figures/
 
