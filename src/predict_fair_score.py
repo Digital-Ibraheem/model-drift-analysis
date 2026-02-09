@@ -2,6 +2,7 @@
 
 import os
 import sys
+import argparse
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -11,21 +12,53 @@ import joblib
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fair_game.config import PROCESSED_DATA_DIR, MODELS_DIR
 
+
+def parse_args():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description='Generate fair score predictions'
+    )
+    parser.add_argument(
+        '--model', type=str, choices=['linear', 'poisson'],
+        default='linear', help='Model type to use (default: linear)'
+    )
+    return parser.parse_args()
+
+
 def main():
-    # Load trained models
-    home_model_file = f"{MODELS_DIR}/home_model.pkl"
-    away_model_file = f"{MODELS_DIR}/away_model.pkl"
+    args = parse_args()
 
-    if not os.path.exists(home_model_file) or not os.path.exists(away_model_file):
-        print("ERROR: Models not found")
-        print("Please run train_model.py first")
-        sys.exit(1)
+    # Determine model files based on type
+    suffix = f"_{args.model}" if args.model != 'linear' else ""
+    home_model_file = f"{MODELS_DIR}/home_model{suffix}.pkl"
+    away_model_file = f"{MODELS_DIR}/away_model{suffix}.pkl"
+    metadata_file = f"{MODELS_DIR}/model_metadata{suffix}.pkl"
 
-    print("Loading models...")
+    # Check model files exist
+    for f in [home_model_file, away_model_file]:
+        if not os.path.exists(f):
+            print(f"ERROR: {f} not found")
+            print("Please run train_model.py first")
+            sys.exit(1)
+
+    print(f"Loading models (type: {args.model})...")
     home_model = joblib.load(home_model_file)
     away_model = joblib.load(away_model_file)
     print(f"Loaded: {home_model_file}")
     print(f"Loaded: {away_model_file}")
+
+    # Load metadata if available, otherwise use defaults
+    if os.path.exists(metadata_file):
+        metadata = joblib.load(metadata_file)
+        home_features = metadata['home_features']
+        away_features = metadata['away_features']
+        print(f"Loaded metadata: {metadata_file}")
+        print(f"Feature set: {metadata.get('feature_set', 'unknown')}")
+    else:
+        # Fallback to legacy features
+        print("No metadata found, using default features")
+        home_features = ['home_shots_total', 'home_shots_on_target', 'home_possession', 'home_indicator']
+        away_features = ['away_shots_total', 'away_shots_on_target', 'away_possession']
 
     # Read match dataset
     input_file = f"{PROCESSED_DATA_DIR}/match_dataset.csv"
@@ -40,13 +73,23 @@ def main():
     print(f"Loaded {len(df)} matches")
 
     # Prepare features for home model
-    df['home_indicator'] = 1
-    home_features = ['home_shots_total', 'home_shots_on_target', 'home_possession', 'home_indicator']
-    X_home = df[home_features].fillna(0)
+    if 'home_indicator' in home_features and 'home_indicator' not in df.columns:
+        df['home_indicator'] = 1
 
-    # Prepare features for away model
-    away_features = ['away_shots_total', 'away_shots_on_target', 'away_possession']
-    X_away = df[away_features].fillna(0)
+    # Check which features are available
+    available_home = [f for f in home_features if f in df.columns]
+    available_away = [f for f in away_features if f in df.columns]
+
+    missing_home = [f for f in home_features if f not in df.columns]
+    missing_away = [f for f in away_features if f not in df.columns]
+
+    if missing_home:
+        print(f"Warning: Missing home features: {missing_home}")
+    if missing_away:
+        print(f"Warning: Missing away features: {missing_away}")
+
+    X_home = df[available_home].fillna(0)
+    X_away = df[available_away].fillna(0)
 
     # Generate predictions
     print("\nGenerating predictions...")
