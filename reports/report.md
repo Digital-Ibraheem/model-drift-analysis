@@ -13,14 +13,14 @@ This report analyzes 120 Premier League matches from the 2023 season. We trained
 ## Model Performance
 
 ### Home Goals Model
-- **MAE:** 0.810
-- **RMSE:** 1.050
-- **R²:** 0.401
+- **MAE:** 0.788
+- **RMSE:** 1.011
+- **R²:** 0.445
 
 ### Away Goals Model
-- **MAE:** 0.665
-- **RMSE:** 0.858
-- **R²:** 0.526
+- **MAE:** 0.672
+- **RMSE:** 0.854
+- **R²:** 0.529
 
 ## Visualizations
 
@@ -42,26 +42,26 @@ Matches where the fair scoreline differed most from the actual result:
 
 | Home | Away | Actual | Fair | Error |
 |------|------|--------|------|-------|
-| Manchester City | Fulham | 5-1 | 2-2 | 4 |
+| Tottenham | Chelsea | 1-4 | 3-2 | 4 |
 | Everton | Fulham | 0-1 | 3-1 | 3 |
-| Arsenal | Fulham | 2-2 | 4-1 | 3 |
+| Wolves | Brighton | 1-4 | 2-2 | 3 |
 | Brighton | West Ham | 1-3 | 3-2 | 3 |
 | Liverpool | Aston Villa | 3-0 | 1-1 | 3 |
-| Sheffield Utd | Newcastle | 0-8 | 0-5 | 3 |
 | Aston Villa | Brighton | 6-1 | 3-1 | 3 |
-| Burnley | Crystal Palace | 0-2 | 2-1 | 3 |
-| Bournemouth | West Ham | 1-1 | 2-0 | 2 |
-| Newcastle | Aston Villa | 5-1 | 4-2 | 2 |
-| Chelsea | Liverpool | 1-1 | 2-0 | 2 |
-| Wolves | Brighton | 1-4 | 2-3 | 2 |
+| Bournemouth | Arsenal | 0-4 | 1-2 | 3 |
+| Arsenal | Sheffield Utd | 5-0 | 3-1 | 3 |
+| Manchester City | Bournemouth | 6-1 | 3-1 | 3 |
+| Burnley | Manchester City | 0-3 | 1-2 | 2 |
+| Fulham | Brentford | 0-3 | 1-2 | 2 |
 | Aston Villa | Everton | 4-0 | 3-1 | 2 |
+| Bournemouth | Tottenham | 0-2 | 1-1 | 2 |
+| Arsenal | Fulham | 2-2 | 3-1 | 2 |
 | Everton | Wolves | 0-1 | 2-1 | 2 |
+| Burnley | Aston Villa | 1-3 | 1-1 | 2 |
 | Newcastle | Liverpool | 1-2 | 2-1 | 2 |
+| Manchester City | Fulham | 5-1 | 3-1 | 2 |
 | Crystal Palace | Wolves | 3-2 | 4-1 | 2 |
-| West Ham | Manchester City | 1-3 | 1-5 | 2 |
-| Burnley | Manchester United | 0-1 | 2-1 | 2 |
-| Brighton | Bournemouth | 3-1 | 1-1 | 2 |
-| Bournemouth | Arsenal | 0-4 | 1-3 | 2 |
+| Aston Villa | Crystal Palace | 3-1 | 1-1 | 2 |
 
 ## Team Luck Analysis
 
@@ -71,16 +71,16 @@ Teams that got better results than their stats deserved:
 
 | Team | Matches | Lucky Wins | Unlucky Losses | Net Lucky Results | Luck Rate |
 |------|---------|------------|----------------|-------------------|----------|
-| Liverpool | 12 | 2 | 0 | 4 | 33.3% |
-| Manchester United | 12 | 4 | 1 | 3 | 25.0% |
-| Arsenal | 12 | 3 | 0 | 3 | 25.0% |
-| West Ham | 12 | 2 | 1 | 2 | 16.7% |
-| Brentford | 12 | 0 | 0 | 1 | 8.3% |
-| Nottingham Forest | 12 | 3 | 1 | 1 | 8.3% |
-| Tottenham | 12 | 2 | 1 | 1 | 8.3% |
-| Wolves | 12 | 4 | 2 | 1 | 8.3% |
-| Everton | 12 | 2 | 3 | 0 | 0.0% |
-| Aston Villa | 12 | 2 | 2 | 0 | 0.0% |
+| Tottenham | 12 | 3 | 1 | 4 | 33.3% |
+| Liverpool | 12 | 2 | 0 | 3 | 25.0% |
+| Fulham | 12 | 3 | 2 | 3 | 25.0% |
+| Nottingham Forest | 12 | 2 | 0 | 2 | 16.7% |
+| Newcastle | 12 | 2 | 2 | 2 | 16.7% |
+| Manchester United | 12 | 3 | 1 | 2 | 16.7% |
+| Aston Villa | 12 | 3 | 1 | 2 | 16.7% |
+| Sheffield Utd | 12 | 1 | 2 | 0 | 0.0% |
+| Arsenal | 12 | 2 | 1 | 0 | 0.0% |
+| Everton | 12 | 3 | 3 | 0 | 0.0% |
 
 ### Unluckiest Teams
 
@@ -88,16 +88,16 @@ Teams that got worse results than their stats deserved:
 
 | Team | Matches | Lucky Wins | Unlucky Losses | Net Lucky Results | Luck Rate |
 |------|---------|------------|----------------|-------------------|----------|
-| Chelsea | 12 | 1 | 2 | -3 | -25.0% |
-| Manchester City | 12 | 1 | 2 | -2 | -16.7% |
-| Bournemouth | 12 | 0 | 2 | -2 | -16.7% |
+| Brentford | 12 | 1 | 2 | -4 | -33.3% |
+| Crystal Palace | 12 | 2 | 4 | -2 | -16.7% |
+| Luton | 12 | 1 | 5 | -2 | -16.7% |
+| Chelsea | 12 | 2 | 1 | -2 | -16.7% |
 | Burnley | 12 | 1 | 3 | -2 | -16.7% |
-| Luton | 12 | 1 | 4 | -2 | -16.7% |
-| Fulham | 12 | 2 | 3 | -1 | -8.3% |
-| Brighton | 12 | 1 | 1 | -1 | -8.3% |
-| Newcastle | 12 | 0 | 1 | -1 | -8.3% |
-| Crystal Palace | 12 | 2 | 3 | -1 | -8.3% |
-| Sheffield Utd | 12 | 1 | 2 | -1 | -8.3% |
+| Wolves | 12 | 3 | 3 | -2 | -16.7% |
+| Manchester City | 12 | 1 | 2 | -1 | -8.3% |
+| Brighton | 12 | 2 | 1 | -1 | -8.3% |
+| Bournemouth | 12 | 0 | 3 | -1 | -8.3% |
+| West Ham | 12 | 2 | 2 | -1 | -8.3% |
 
 ---
 
